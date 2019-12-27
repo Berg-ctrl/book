@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.BookCategoryMapper">
+  <resultMap id="BaseResultMap" type="book.domain.BookCategory">
+    <id column="category_id" jdbcType="INTEGER" property="category_id" />
+    <result column="category_name" jdbcType="VARCHAR" property="category_name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    category_id, category_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book_category
+    where category_id = #{category_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book_category
+    where category_id = #{category_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.BookCategory">
+    insert into book_category (category_id, category_name)
+    values (#{category_id,jdbcType=INTEGER}, #{category_name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.BookCategory">
+    insert into book_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="category_id != null">
+        category_id,
+      </if>
+      <if test="category_name != null">
+        category_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="category_id != null">
+        #{category_id,jdbcType=INTEGER},
+      </if>
+      <if test="category_name != null">
+        #{category_name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.BookCategory">
+    update book_category
+    <set>
+      <if test="category_name != null">
+        category_name = #{category_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where category_id = #{category_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.BookCategory">
+    update book_category
+    set category_name = #{category_name,jdbcType=VARCHAR}
+    where category_id = #{category_id,jdbcType=INTEGER}
+  </update>
+</mapper>

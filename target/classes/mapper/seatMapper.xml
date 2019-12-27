@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.seatMapper">
+  <resultMap id="BaseResultMap" type="book.domain.seat">
+    <id column="seat_id" jdbcType="INTEGER" property="seat_id" />
+    <result column="seat_num" jdbcType="INTEGER" property="seat_num" />
+    <result column="seat_state" jdbcType="VARCHAR" property="seat_state" />
+    <result column="room_id" jdbcType="INTEGER" property="room_id" />
+    <result column="seat_used_num" jdbcType="INTEGER" property="seat_used_num" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    seat_id, seat_num, seat_state, room_id, seat_used_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from seat
+    where seat_id = #{seat_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from seat
+    where seat_id = #{seat_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.seat">
+    insert into seat (seat_id, seat_num, seat_state, 
+      room_id, seat_used_num)
+    values (#{seat_id,jdbcType=INTEGER}, #{seat_num,jdbcType=INTEGER}, #{seat_state,jdbcType=VARCHAR}, 
+      #{room_id,jdbcType=INTEGER}, #{seat_used_num,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.seat">
+    insert into seat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="seat_id != null">
+        seat_id,
+      </if>
+      <if test="seat_num != null">
+        seat_num,
+      </if>
+      <if test="seat_state != null">
+        seat_state,
+      </if>
+      <if test="room_id != null">
+        room_id,
+      </if>
+      <if test="seat_used_num != null">
+        seat_used_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="seat_id != null">
+        #{seat_id,jdbcType=INTEGER},
+      </if>
+      <if test="seat_num != null">
+        #{seat_num,jdbcType=INTEGER},
+      </if>
+      <if test="seat_state != null">
+        #{seat_state,jdbcType=VARCHAR},
+      </if>
+      <if test="room_id != null">
+        #{room_id,jdbcType=INTEGER},
+      </if>
+      <if test="seat_used_num != null">
+        #{seat_used_num,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.seat">
+    update seat
+    <set>
+      <if test="seat_num != null">
+        seat_num = #{seat_num,jdbcType=INTEGER},
+      </if>
+      <if test="seat_state != null">
+        seat_state = #{seat_state,jdbcType=VARCHAR},
+      </if>
+      <if test="room_id != null">
+        room_id = #{room_id,jdbcType=INTEGER},
+      </if>
+      <if test="seat_used_num != null">
+        seat_used_num = #{seat_used_num,jdbcType=INTEGER},
+      </if>
+    </set>
+    where seat_id = #{seat_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.seat">
+    update seat
+    set seat_num = #{seat_num,jdbcType=INTEGER},
+      seat_state = #{seat_state,jdbcType=VARCHAR},
+      room_id = #{room_id,jdbcType=INTEGER},
+      seat_used_num = #{seat_used_num,jdbcType=INTEGER}
+    where seat_id = #{seat_id,jdbcType=INTEGER}
+  </update>
+</mapper>

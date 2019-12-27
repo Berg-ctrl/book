@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.wyMapper">
+  <resultMap id="BaseResultMap" type="book.domain.wy">
+    <id column="wy_id" jdbcType="INTEGER" property="wy_id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="admin_id" jdbcType="INTEGER" property="admin_id" />
+    <result column="book_id" jdbcType="INTEGER" property="book_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    wy_id, user_id, admin_id, book_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wy
+    where wy_id = #{wy_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wy
+    where wy_id = #{wy_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.wy">
+    insert into wy (wy_id, user_id, admin_id, 
+      book_id)
+    values (#{wy_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{admin_id,jdbcType=INTEGER}, 
+      #{book_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.wy">
+    insert into wy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wy_id != null">
+        wy_id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="admin_id != null">
+        admin_id,
+      </if>
+      <if test="book_id != null">
+        book_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wy_id != null">
+        #{wy_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="admin_id != null">
+        #{admin_id,jdbcType=INTEGER},
+      </if>
+      <if test="book_id != null">
+        #{book_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.wy">
+    update wy
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="admin_id != null">
+        admin_id = #{admin_id,jdbcType=INTEGER},
+      </if>
+      <if test="book_id != null">
+        book_id = #{book_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wy_id = #{wy_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.wy">
+    update wy
+    set user_id = #{user_id,jdbcType=INTEGER},
+      admin_id = #{admin_id,jdbcType=INTEGER},
+      book_id = #{book_id,jdbcType=INTEGER}
+    where wy_id = #{wy_id,jdbcType=INTEGER}
+  </update>
+</mapper>

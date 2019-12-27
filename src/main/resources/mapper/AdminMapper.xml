@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.AdminMapper">
+  <resultMap id="BaseResultMap" type="book.domain.Admin">
+    <id column="admin_id" jdbcType="INTEGER" property="admin_id" />
+    <result column="admin_name" jdbcType="VARCHAR" property="admin_name" />
+    <result column="admin_pwd" jdbcType="VARCHAR" property="admin_pwd" />
+    <result column="admin_email" jdbcType="VARCHAR" property="admin_email" />
+    <result column="admin_phone" jdbcType="VARCHAR" property="admin_phone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    admin_id, admin_name, admin_pwd, admin_email, admin_phone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_admin
+    where admin_id = #{admin_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p_admin
+    where admin_id = #{admin_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.Admin">
+    insert into p_admin (admin_id, admin_name, admin_pwd, 
+      admin_email, admin_phone)
+    values (#{admin_id,jdbcType=INTEGER}, #{admin_name,jdbcType=VARCHAR}, #{admin_pwd,jdbcType=VARCHAR}, 
+      #{admin_email,jdbcType=VARCHAR}, #{admin_phone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.Admin">
+    insert into p_admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="admin_id != null">
+        admin_id,
+      </if>
+      <if test="admin_name != null">
+        admin_name,
+      </if>
+      <if test="admin_pwd != null">
+        admin_pwd,
+      </if>
+      <if test="admin_email != null">
+        admin_email,
+      </if>
+      <if test="admin_phone != null">
+        admin_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="admin_id != null">
+        #{admin_id,jdbcType=INTEGER},
+      </if>
+      <if test="admin_name != null">
+        #{admin_name,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_pwd != null">
+        #{admin_pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_email != null">
+        #{admin_email,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_phone != null">
+        #{admin_phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.Admin">
+    update p_admin
+    <set>
+      <if test="admin_name != null">
+        admin_name = #{admin_name,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_pwd != null">
+        admin_pwd = #{admin_pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_email != null">
+        admin_email = #{admin_email,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_phone != null">
+        admin_phone = #{admin_phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where admin_id = #{admin_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.Admin">
+    update p_admin
+    set admin_name = #{admin_name,jdbcType=VARCHAR},
+      admin_pwd = #{admin_pwd,jdbcType=VARCHAR},
+      admin_email = #{admin_email,jdbcType=VARCHAR},
+      admin_phone = #{admin_phone,jdbcType=VARCHAR}
+    where admin_id = #{admin_id,jdbcType=INTEGER}
+  </update>
+</mapper>

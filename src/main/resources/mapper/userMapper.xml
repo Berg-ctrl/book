@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.userMapper">
+  <resultMap id="BaseResultMap" type="book.domain.user">
+    <id column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_name" jdbcType="VARCHAR" property="user_name" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="user_pwd" />
+    <result column="user_email" jdbcType="VARCHAR" property="user_email" />
+    <result column="user_sex" jdbcType="VARCHAR" property="user_sex" />
+    <result column="user_type" jdbcType="VARCHAR" property="user_type" />
+    <result column="dept_id" jdbcType="INTEGER" property="dept_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_name, user_pwd, user_email, user_sex, user_type, dept_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_user
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p_user
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.user">
+    insert into p_user (user_id, user_name, user_pwd, 
+      user_email, user_sex, user_type, 
+      dept_id)
+    values (#{user_id,jdbcType=INTEGER}, #{user_name,jdbcType=VARCHAR}, #{user_pwd,jdbcType=VARCHAR}, 
+      #{user_email,jdbcType=VARCHAR}, #{user_sex,jdbcType=VARCHAR}, #{user_type,jdbcType=VARCHAR}, 
+      #{dept_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.user">
+    insert into p_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="user_name != null">
+        user_name,
+      </if>
+      <if test="user_pwd != null">
+        user_pwd,
+      </if>
+      <if test="user_email != null">
+        user_email,
+      </if>
+      <if test="user_sex != null">
+        user_sex,
+      </if>
+      <if test="user_type != null">
+        user_type,
+      </if>
+      <if test="dept_id != null">
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_name != null">
+        #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_pwd != null">
+        #{user_pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null">
+        #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="user_sex != null">
+        #{user_sex,jdbcType=VARCHAR},
+      </if>
+      <if test="user_type != null">
+        #{user_type,jdbcType=VARCHAR},
+      </if>
+      <if test="dept_id != null">
+        #{dept_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.user">
+    update p_user
+    <set>
+      <if test="user_name != null">
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_pwd != null">
+        user_pwd = #{user_pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null">
+        user_email = #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="user_sex != null">
+        user_sex = #{user_sex,jdbcType=VARCHAR},
+      </if>
+      <if test="user_type != null">
+        user_type = #{user_type,jdbcType=VARCHAR},
+      </if>
+      <if test="dept_id != null">
+        dept_id = #{dept_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.user">
+    update p_user
+    set user_name = #{user_name,jdbcType=VARCHAR},
+      user_pwd = #{user_pwd,jdbcType=VARCHAR},
+      user_email = #{user_email,jdbcType=VARCHAR},
+      user_sex = #{user_sex,jdbcType=VARCHAR},
+      user_type = #{user_type,jdbcType=VARCHAR},
+      dept_id = #{dept_id,jdbcType=INTEGER}
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </update>
+</mapper>

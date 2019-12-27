@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.roomMapper">
+  <resultMap id="BaseResultMap" type="book.domain.room">
+    <id column="room_id" jdbcType="INTEGER" property="room_id" />
+    <result column="room_address" jdbcType="VARCHAR" property="room_address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    room_id, room_address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from room
+    where room_id = #{room_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from room
+    where room_id = #{room_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.room">
+    insert into room (room_id, room_address)
+    values (#{room_id,jdbcType=INTEGER}, #{room_address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.room">
+    insert into room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="room_id != null">
+        room_id,
+      </if>
+      <if test="room_address != null">
+        room_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="room_id != null">
+        #{room_id,jdbcType=INTEGER},
+      </if>
+      <if test="room_address != null">
+        #{room_address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.room">
+    update room
+    <set>
+      <if test="room_address != null">
+        room_address = #{room_address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where room_id = #{room_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.room">
+    update room
+    set room_address = #{room_address,jdbcType=VARCHAR}
+    where room_id = #{room_id,jdbcType=INTEGER}
+  </update>
+</mapper>

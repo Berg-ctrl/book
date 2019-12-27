@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>导航栏</title>
+    <script src="/scripts/jquery-3.3.1.min.js"></script>
+    <script src="/scripts/base/base.js"></script>
+    <link href="/css/myUIstyle.css" rel="stylesheet" />
+    <script src="/scripts/admin/allBorrowingBooksRecord.js"></script>
+</head>
+<body>
+
+<div class="top">
+    <div class="dropdown" style="float: right">
+        <button class="dropbtn">admin</button>
+        <div class="dropdown-content">
+            <a href="#">功能1</a>
+            <a href="#">功能2</a>
+            <a href="/adminLogOut">退出</a>
+        </div>
+
+    </div>
+</div>
+<ul>
+    <li id="click_1"><a href="#">书籍管理</a></li>
+    <div class="funBackgroungColor">
+        <li id="fun1" class="hidden"><a href="/addBookPage">录入新书</a></li>
+        <li id="fun2" class="hidden"><a href="/addCategoryPage?pageNum=1">新建类别</a></li>
+        <li id="fun2" class="hidden"><a href="/showBooksPage">查询书籍</a></li>
+    </div>
+    <li id="click_2"><a href="#">用户管理</a></li>
+    <div class="funBackgroungColor">
+        <li id="fun3" class="hidden"><a href="/showUsersPage?pageNum=1">查询用户</a></li>
+        <li id="fun4" class="hidden"><a href="/addUserPage">新增用户</a></li>
+    </div>
+    <li id="click_3"><a href="#">借阅信息</a></li>
+    <div class="funBackgroungColor">
+        <li id="fun5" class="hidden"><a href="/allBorrowBooksRecordPage?pageNum=1">所有借书记录</a></li>
+        <li id="fun6" class="hidden"><a href="/alluse_seat">所有预定记录</a></li>
+    </div>
+    <li id="click_4"><a href="#">帮助</a></li>
+    <div class="funBackgroungColor">
+        <li id="fun7" class="hidden"><a href="#">功能7</a></li>
+        <li id="fun8" class="hidden"><a href="#">功能8</a></li>
+    </div>
+</ul>
+
+<div style="margin-left:18%;padding:1px 16px;">
+   <h3 style="text-align: center">预约记录</h3>
+    <table>
+        <tr>
+            <th>座位id</th>
+            <th>用户id</th>
+            <th>预约日期</th>
+            <th>预约开始时间</th>
+            <th>预约结束时间</th>
+            <th>是否违约</th>
+        </tr>
+        <tr>
+            <th>1</th>
+            <th>143</th>
+            <th>2019-12-12</th>
+            <th>8：00</th>
+            <th>10：00</th>
+            <th>否</th>
+        </tr>
+                <tr>
+            <th>2</th>
+            <th>112</th>
+            <th>2019-12-11</th>
+            <th>9：00</th>
+            <th>10：00</th>
+            <th>否</th>
+        </tr>
+                <tr>
+            <th>3</th>
+            <th>132</th>
+            <th>2019-12-10</th>
+            <th>8：00</th>
+            <th>10：00</th>
+            <th>是</th>
+        </tr>
+                <tr>
+            <th>4</th>
+            <th>12</th>
+            <th>2019-12-09</th>
+            <th>8：00</th>
+            <th>10：00</th>
+            <th>是</th>
+        </tr>
+    </table>
+    <br><br>
+</div>
+</body>
+</html>

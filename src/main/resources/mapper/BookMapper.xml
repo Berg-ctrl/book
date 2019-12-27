@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.BookMapper">
+  <resultMap id="BaseResultMap" type="book.domain.Book">
+    <id column="book_id" jdbcType="INTEGER" property="book_id" />
+    <result column="book_name" jdbcType="VARCHAR" property="book_name" />
+    <result column="book_author" jdbcType="VARCHAR" property="book_author" />
+    <result column="book_publish" jdbcType="VARCHAR" property="book_publish" />
+    <result column="book_category" jdbcType="INTEGER" property="book_category" />
+    <result column="book_price" jdbcType="DOUBLE" property="book_price" />
+    <result column="book_introduction" jdbcType="VARCHAR" property="book_introduction" />
+    <result column="book_copyNum" jdbcType="INTEGER" property="book_copyNum" />
+    <result column="book_roomNo" jdbcType="INTEGER" property="book_roomNo" />
+    <result column="book_state" jdbcType="VARCHAR" property="book_state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    book_id, book_name, book_author, book_publish, book_category, book_price, book_introduction, 
+    book_copyNum, book_roomNo, book_state
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where book_id = #{bookId,jdbcType=INTEGER} and book_state="${"可借"}"
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.Book">
+    insert into book (book_id, book_name, book_author, 
+      book_publish, book_category, book_price, 
+      book_introduction, book_copyNum, book_roomNo, 
+      book_state)
+    values (#{book_id,jdbcType=INTEGER}, #{book_name,jdbcType=VARCHAR}, #{book_author,jdbcType=VARCHAR}, 
+      #{book_publish,jdbcType=VARCHAR}, #{book_category,jdbcType=INTEGER}, #{book_price,jdbcType=DOUBLE}, 
+      #{book_introduction,jdbcType=VARCHAR}, #{book_copyNum,jdbcType=INTEGER}, #{book_roomNo,jdbcType=INTEGER}, 
+      #{book_state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.Book">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="bookName != null">
+        book_name,
+      </if>
+      <if test="bookAuthor != null">
+        book_author,
+      </if>
+      <if test="bookPublish != null">
+        book_publish,
+      </if>
+      <if test="bookCategory != null">
+        book_category,
+      </if>
+      <if test="bookPrice != null">
+        book_price,
+      </if>
+      <if test="bookIntroduction != null">
+        book_introduction,
+      </if>
+      <if test="bookCopynum != null">
+        book_copyNum,
+      </if>
+      <if test="bookRoomno != null">
+        book_roomNo,
+      </if>
+      <if test="bookState != null">
+        book_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null">
+        #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPublish != null">
+        #{bookPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCategory != null">
+        #{bookCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookPrice != null">
+        #{bookPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bookIntroduction != null">
+        #{bookIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCopynum != null">
+        #{bookCopynum,jdbcType=INTEGER},
+      </if>
+      <if test="bookRoomno != null">
+        #{bookRoomno,jdbcType=INTEGER},
+      </if>
+      <if test="bookState != null">
+        #{bookState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.Book">
+    update book
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null">
+        book_author = #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPublish != null">
+        book_publish = #{bookPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCategory != null">
+        book_category = #{bookCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookPrice != null">
+        book_price = #{bookPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bookIntroduction != null">
+        book_introduction = #{bookIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCopynum != null">
+        book_copyNum = #{bookCopynum,jdbcType=INTEGER},
+      </if>
+      <if test="bookRoomno != null">
+        book_roomNo = #{bookRoomno,jdbcType=INTEGER},
+      </if>
+      <if test="bookState != null">
+        book_state = #{bookState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.Book">
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      book_author = #{bookAuthor,jdbcType=VARCHAR},
+      book_publish = #{bookPublish,jdbcType=VARCHAR},
+      book_category = #{bookCategory,jdbcType=INTEGER},
+      book_price = #{bookPrice,jdbcType=DOUBLE},
+      book_introduction = #{bookIntroduction,jdbcType=VARCHAR},
+      book_copyNum = #{bookCopynum,jdbcType=INTEGER},
+      book_roomNo = #{bookRoomno,jdbcType=INTEGER},
+      book_state = #{bookState,jdbcType=VARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

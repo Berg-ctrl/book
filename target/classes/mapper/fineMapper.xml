@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.mapper.fineMapper">
+  <resultMap id="BaseResultMap" type="book.domain.fine">
+    <id column="fine_id" jdbcType="INTEGER" property="fine_id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="book_id" jdbcType="INTEGER" property="book_id" />
+    <result column="deal_time" jdbcType="DATE" property="deal_time" />
+    <result column="fine_money" jdbcType="INTEGER" property="fine_money" />
+    <result column="is_handin" jdbcType="VARCHAR" property="is_handin" />
+    <result column="admin_id" jdbcType="INTEGER" property="admin_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fine_id, user_id, book_id, deal_time, fine_money, is_handin, admin_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fine
+    where fine_id = #{fine_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fine
+    where fine_id = #{fine_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="book.domain.fine">
+    insert into fine (fine_id, user_id, book_id, 
+      deal_time, fine_money, is_handin, 
+      admin_id)
+    values (#{fine_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{book_id,jdbcType=INTEGER}, 
+      #{deal_time,jdbcType=DATE}, #{fine_money,jdbcType=INTEGER}, #{is_handin,jdbcType=VARCHAR}, 
+      #{admin_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="book.domain.fine">
+    insert into fine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fine_id != null">
+        fine_id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="book_id != null">
+        book_id,
+      </if>
+      <if test="deal_time != null">
+        deal_time,
+      </if>
+      <if test="fine_money != null">
+        fine_money,
+      </if>
+      <if test="is_handin != null">
+        is_handin,
+      </if>
+      <if test="admin_id != null">
+        admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fine_id != null">
+        #{fine_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="book_id != null">
+        #{book_id,jdbcType=INTEGER},
+      </if>
+      <if test="deal_time != null">
+        #{deal_time,jdbcType=DATE},
+      </if>
+      <if test="fine_money != null">
+        #{fine_money,jdbcType=INTEGER},
+      </if>
+      <if test="is_handin != null">
+        #{is_handin,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_id != null">
+        #{admin_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="book.domain.fine">
+    update fine
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="book_id != null">
+        book_id = #{book_id,jdbcType=INTEGER},
+      </if>
+      <if test="deal_time != null">
+        deal_time = #{deal_time,jdbcType=DATE},
+      </if>
+      <if test="fine_money != null">
+        fine_money = #{fine_money,jdbcType=INTEGER},
+      </if>
+      <if test="is_handin != null">
+        is_handin = #{is_handin,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_id != null">
+        admin_id = #{admin_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fine_id = #{fine_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="book.domain.fine">
+    update fine
+    set user_id = #{user_id,jdbcType=INTEGER},
+      book_id = #{book_id,jdbcType=INTEGER},
+      deal_time = #{deal_time,jdbcType=DATE},
+      fine_money = #{fine_money,jdbcType=INTEGER},
+      is_handin = #{is_handin,jdbcType=VARCHAR},
+      admin_id = #{admin_id,jdbcType=INTEGER}
+    where fine_id = #{fine_id,jdbcType=INTEGER}
+  </update>
+</mapper>
